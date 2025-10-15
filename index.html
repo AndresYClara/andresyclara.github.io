@@ -462,6 +462,149 @@
         padding: 60px 0;
     }
 }
+
+/* Estilos para el modal de celebración */
+.celebration-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.5s ease;
+}
+
+.celebration-content {
+    position: relative;
+    background: linear-gradient(135deg, #fff5f7 0%, #ffe6eb 100%);
+    margin: 5% auto;
+    padding: 40px;
+    border: 3px solid #e91e63;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 20px 60px rgba(233, 30, 99, 0.4);
+    animation: slideDown 0.6s ease;
+    text-align: center;
+}
+
+.celebration-header {
+    font-size: 48px;
+    margin-bottom: 20px;
+    animation: heartFloat 2s ease-in-out infinite;
+}
+
+.celebration-title {
+    color: #e91e63;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.celebration-message {
+    color: #2c3e50;
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.celebration-signature {
+    color: #e91e63;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+    margin-top: 30px;
+    text-align: right;
+    padding-right: 40px;
+}
+
+.close-celebration {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #e91e63;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-celebration:hover {
+    color: #c2185b;
+    transform: scale(1.2);
+}
+
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #e91e63;
+    animation: confetti-fall 3s linear infinite;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .celebration-content {
+        width: 95%;
+        padding: 30px 20px;
+        margin: 10% auto;
+    }
+    
+    .celebration-title {
+        font-size: 28px;
+    }
+    
+    .celebration-message {
+        font-size: 16px;
+        padding: 0 10px;
+    }
+    
+    .celebration-header {
+        font-size: 36px;
+    }
+}
 </style>
  
 <!--[if lt IE 9]>
@@ -472,6 +615,26 @@
  
 </head>
 <body>
+
+<!-- Modal de Celebración de 3 Meses -->
+<div id="celebrationModal" class="celebration-modal">
+  <div class="celebration-content">
+    <span class="close-celebration">&times;</span>
+    <div class="celebration-header">💖✨💕</div>
+    <h2 class="celebration-title">Mi amor, feliz tercer mes 💖</h2>
+    <div class="celebration-message">
+      <p>No puedo creer que ya pasaron tres meses desde que empezamos esta historia tan linda. Cada día a tu lado me hace sentir más seguro, más feliz y más completo. Te amo muchísimo, Clara. No solo por lo que sos, sino por cómo me haces sentir.</p>
+      
+      <p>Aprecio cada cosa que hacés, cada detalle, cada mensaje, cada gesto tuyo. Todo lo que viene de vos tiene un valor enorme para mí. Me encanta cómo me cuidás, cómo me hacés reír, cómo lográs que incluso los días simples sean especiales.</p>
+      
+      <p>Gracias por ser vos, por estar, por quererme así. Ojalá sigamos sumando meses, momentos y recuerdos juntos, porque no hay nada que desee más que seguir compartiendo la vida con vos. ❤️</p>
+    </div>
+    <div class="celebration-signature">Con todo mi amor,<br>Andrés 💕</div>
+  </div>
+</div>
+
+<!-- Contenedor de confetti -->
+<div class="confetti-container" id="confettiContainer"></div>
 
 <!--Hero_Section-->
 <section id="hero_section" class="top_cont_outer">
@@ -1046,6 +1209,98 @@ $(document).ready(function() {
             }, 2000);
         }
     );
+    
+    // ============================================
+    // SISTEMA DE CELEBRACIÓN DE 3 MESES
+    // ============================================
+    
+    function checkThreeMonthsCelebration() {
+        const now = new Date();
+        const threeMonthsDate = new Date('2025-10-16T00:00:00'); // 3 meses después del 16 de julio
+        
+        // Verificar si ya se mostró la celebración hoy
+        const celebrationShown = localStorage.getItem('celebrationShown3Months');
+        const today = now.toDateString();
+        
+        // Calcular si ya llegamos a los 3 meses
+        const timeDiff = now - threeMonthsDate;
+        const daysSinceThreeMonths = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        
+        // *** MODO DE PRUEBA: Descomentar la siguiente línea para probar el modal ***
+        // Para probar: cambiar false por true
+        const testMode = false; // CAMBIAR A false ANTES DE SUBIR A GITHUB
+        
+        // Mostrar el modal si:
+        // 1. Ya pasaron 3 meses (daysSinceThreeMonths >= 0)
+        // 2. No han pasado más de 7 días desde el aniversario (para que tengan tiempo de verlo)
+        // 3. No se ha mostrado hoy
+        // O si está en modo de prueba
+        if (testMode || (daysSinceThreeMonths >= 0 && daysSinceThreeMonths <= 7 && celebrationShown !== today)) {
+            setTimeout(() => {
+                showCelebration();
+                if (!testMode) {
+                    localStorage.setItem('celebrationShown3Months', today);
+                }
+            }, 2000); // Esperar 2 segundos antes de mostrar
+        }
+    }
+    
+    function showCelebration() {
+        const modal = $('#celebrationModal');
+        modal.fadeIn(500);
+        createConfetti();
+        
+        // Reproducir sonido de celebración (si quisieras agregar uno)
+        // const audio = new Audio('path/to/celebration-sound.mp3');
+        // audio.play();
+    }
+    
+    function createConfetti() {
+        const container = $('#confettiContainer');
+        const colors = ['#e91e63', '#ff4081', '#f50057', '#ff6090', '#ffc1e3'];
+        
+        for (let i = 0; i < 50; i++) {
+            const confetti = $('<div class="confetti"></div>');
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const left = Math.random() * 100;
+            const animationDelay = Math.random() * 3;
+            const animationDuration = 3 + Math.random() * 2;
+            
+            confetti.css({
+                left: left + '%',
+                backgroundColor: color,
+                animationDelay: animationDelay + 's',
+                animationDuration: animationDuration + 's'
+            });
+            
+            container.append(confetti);
+        }
+        
+        // Limpiar confetti después de 6 segundos
+        setTimeout(() => {
+            container.empty();
+        }, 6000);
+    }
+    
+    // Cerrar el modal
+    $('.close-celebration').click(function() {
+        $('#celebrationModal').fadeOut(500);
+        $('#confettiContainer').empty();
+    });
+    
+    // Cerrar al hacer clic fuera del modal
+    $('#celebrationModal').click(function(e) {
+        if (e.target.id === 'celebrationModal') {
+            $(this).fadeOut(500);
+            $('#confettiContainer').empty();
+        }
+    });
+    
+    // Verificar celebración al cargar la página
+    checkThreeMonthsCelebration();
+    
+    // También verificar cada hora por si la página queda abierta
+    setInterval(checkThreeMonthsCelebration, 3600000); // Cada hora
 });
 </script>
 
