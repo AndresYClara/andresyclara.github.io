@@ -1217,30 +1217,21 @@ $(document).ready(function() {
     function checkThreeMonthsCelebration() {
         const now = new Date();
         const threeMonthsDate = new Date('2025-10-16T00:00:00'); // 3 meses después del 16 de julio
+        const threeMonthsEndDate = new Date('2025-10-17T00:00:00'); // Fin del día 16
         
-        // Verificar si ya se mostró la celebración hoy
-        const celebrationShown = localStorage.getItem('celebrationShown3Months');
-        const today = now.toDateString();
-        
-        // Calcular si ya llegamos a los 3 meses
-        const timeDiff = now - threeMonthsDate;
-        const daysSinceThreeMonths = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        // Calcular si estamos en el día exacto de los 3 meses
+        const isThreeMonthsDay = now >= threeMonthsDate && now < threeMonthsEndDate;
         
         // *** MODO DE PRUEBA: Descomentar la siguiente línea para probar el modal ***
         // Para probar: cambiar false por true
         const testMode = false; // CAMBIAR A false ANTES DE SUBIR A GITHUB
         
         // Mostrar el modal si:
-        // 1. Ya pasaron 3 meses (daysSinceThreeMonths >= 0)
-        // 2. No han pasado más de 7 días desde el aniversario (para que tengan tiempo de verlo)
-        // 3. No se ha mostrado hoy
+        // 1. Es el día exacto de los 3 meses (16 de octubre)
         // O si está en modo de prueba
-        if (testMode || (daysSinceThreeMonths >= 0 && daysSinceThreeMonths <= 7 && celebrationShown !== today)) {
+        if (testMode || isThreeMonthsDay) {
             setTimeout(() => {
                 showCelebration();
-                if (!testMode) {
-                    localStorage.setItem('celebrationShown3Months', today);
-                }
             }, 2000); // Esperar 2 segundos antes de mostrar
         }
     }
