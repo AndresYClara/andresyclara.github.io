@@ -585,26 +585,227 @@
     }
 }
 
-@media (max-width: 768px) {
-    .celebration-content {
-        width: 95%;
-        padding: 30px 20px;
-        margin: 10% auto;
+/* Estilos para el modal de cumpleaños */
+.birthday-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.5s ease;
+}
+
+.birthday-content {
+    position: relative;
+    background: linear-gradient(135deg, #fff5f7 0%, #ffe6eb 100%);
+    margin: 5% auto;
+    padding: 40px;
+    border: 3px solid #e91e63;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 20px 60px rgba(233, 30, 99, 0.4);
+    animation: slideDown 0.6s ease;
+    text-align: center;
+}
+
+.birthday-header {
+    font-size: 48px;
+    margin-bottom: 20px;
+    animation: heartFloat 2s ease-in-out infinite;
+}
+
+.birthday-title {
+    color: #e91e63;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.birthday-message {
+    color: #2c3e50;
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.birthday-signature {
+    color: #e91e63;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+    margin-top: 30px;
+    text-align: right;
+    padding-right: 40px;
+}
+
+.close-birthday {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #e91e63;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-birthday:hover {
+    color: #c2185b;
+    transform: scale(1.2);
+}
+
+.balloon-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+.balloon {
+    position: absolute;
+    width: 40px;
+    height: 60px;
+    background: radial-gradient(circle, #ff4081, #e91e63);
+    border-radius: 50%;
+    animation: balloon-float 5s ease-in-out infinite;
+}
+
+@keyframes balloon-float {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
     }
-    
-    .celebration-title {
-        font-size: 28px;
+    50% {
+        opacity: 1;
     }
-    
-    .celebration-message {
-        font-size: 16px;
-        padding: 0 10px;
-    }
-    
-    .celebration-header {
-        font-size: 36px;
+    100% {
+        transform: translateY(-10vh);
+        opacity: 0;
     }
 }
+
+/* Estilos para el modal de aniversario */
+.anniversary-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.5s ease;
+}
+
+.anniversary-content {
+    position: relative;
+    background: linear-gradient(135deg, #fff5f7 0%, #ffe6eb 100%);
+    margin: 5% auto;
+    padding: 40px;
+    border: 3px solid #e91e63;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 20px 60px rgba(233, 30, 99, 0.4);
+    animation: slideDown 0.6s ease;
+    text-align: center;
+}
+
+.anniversary-header {
+    font-size: 48px;
+    margin-bottom: 20px;
+    animation: heartFloat 2s ease-in-out infinite;
+}
+
+.anniversary-title {
+    color: #e91e63;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.anniversary-message {
+    color: #2c3e50;
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.anniversary-signature {
+    color: #e91e63;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+    margin-top: 30px;
+    text-align: right;
+    padding-right: 40px;
+}
+
+.close-anniversary {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #e91e63;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-anniversary:hover {
+    color: #c2185b;
+    transform: scale(1.2);
+}
+
+.heart-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #e91e63;
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 82%, 18% 100%, 0% 38%);
+    animation: heart-float 4s ease-in-out infinite;
+}
+
+@keyframes heart-float {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+/* Fin de los estilos personalizados */
 </style>
  
 <!--[if lt IE 9]>
@@ -633,8 +834,42 @@
   </div>
 </div>
 
+<!-- Modal de Cumpleaños -->
+<div id="birthdayModal" class="celebration-modal">
+  <div class="birthday-content">
+    <span class="close-birthday">&times;</span>
+    <div class="birthday-header">🎂✨🎉</div>
+    <h2 class="birthday-title">¡Feliz cumpleaños, Clara! 🎂</h2>
+    <div class="birthday-message">
+      <p>Hoy celebramos el día en que llegaste al mundo para llenarlo de luz y alegría. Eres una persona increíble, y cada día a tu lado es un regalo. ❤️</p>
+      <p>Espero que este nuevo año esté lleno de amor, risas y momentos inolvidables. ¡Te amo muchísimo, Clara! 💕</p>
+    </div>
+    <div class="birthday-signature">Con todo mi amor,<br>Andrés 💖</div>
+  </div>
+</div>
+
+<!-- Modal de Aniversario de 4 Meses -->
+<div id="anniversaryModal" class="celebration-modal">
+  <div class="celebration-content">
+    <span class="close-celebration">&times;</span>
+    <div class="celebration-header">💖✨💕</div>
+    <h2 class="celebration-title">¡Feliz 4 meses juntos, Clara! 💕</h2>
+    <div class="celebration-message">
+      <p>No puedo creer que ya han pasado 4 meses desde que comenzamos esta hermosa historia. Cada día contigo es un regalo, y mi amor por ti crece más y más. ❤️</p>
+      <p>Gracias por ser mi compañera, mi apoyo y mi felicidad. Espero que sigamos creando recuerdos inolvidables juntos. ¡Te amo muchísimo, Clara! 💖</p>
+    </div>
+    <div class="celebration-signature">Con todo mi amor,<br>Andrés 💕</div>
+  </div>
+</div>
+
 <!-- Contenedor de confetti -->
 <div class="confetti-container" id="confettiContainer"></div>
+
+<!-- Contenedor de globos -->
+<div class="confetti-container" id="balloonContainer"></div>
+
+<!-- Contenedor de corazones -->
+<div class="confetti-container" id="heartContainer"></div>
 
 <!--Hero_Section-->
 <section id="hero_section" class="top_cont_outer">
@@ -1178,7 +1413,7 @@ $(document).ready(function() {
     
     function prevQuote() {
         const prevIndex = (currentQuoteIndex - 1 + romanticQuotes.length) % romanticQuotes.length;
-        updateQuote(prevIndex);
+        updateQuote(prevQuote);
     }
     
     // Inicializar primera frase
@@ -1224,7 +1459,7 @@ $(document).ready(function() {
         
         // *** MODO DE PRUEBA: Descomentar la siguiente línea para probar el modal ***
         // Para probar: cambiar false por true
-        const testMode = false; // CAMBIAR A false ANTES DE SUBIR A GITHUB
+        const testMode = false; // Desactivar modo de prueba para evitar interferencias
         
         // Mostrar el modal si:
         // 1. Es el día exacto de los 3 meses (16 de octubre)
@@ -1292,6 +1527,149 @@ $(document).ready(function() {
     
     // También verificar cada hora por si la página queda abierta
     setInterval(checkThreeMonthsCelebration, 3600000); // Cada hora
+    
+    // ============================================
+    // CELEBRACIÓN DE CUMPLEAÑOS
+    // ============================================
+    
+    function checkBirthdayCelebration() {
+        const now = new Date();
+        const birthdayDate = new Date('2025-11-18T00:00:00');
+        const birthdayEndDate = new Date('2025-11-19T00:00:00');
+
+        console.log('Verificando celebración de cumpleaños...');
+        console.log('Fecha actual:', now);
+        console.log('Rango de cumpleaños:', birthdayDate, 'a', birthdayEndDate);
+        console.log('¿Es el día del cumpleaños?', now >= birthdayDate && now < birthdayEndDate);
+
+        if (now >= birthdayDate && now < birthdayEndDate) {
+            setTimeout(() => {
+                showBirthdayCelebration();
+            }, 2000);
+        }
+    }
+
+    function showBirthdayCelebration() {
+        const modal = $('#birthdayModal');
+        modal.fadeIn(500);
+        createBalloons();
+    }
+
+    function createBalloons() {
+        const container = $('#balloonContainer');
+        for (let i = 0; i < 20; i++) {
+            const balloon = $('<div class="balloon"></div>');
+            const left = Math.random() * 100;
+            const animationDelay = Math.random() * 5;
+
+            balloon.css({
+                left: left + '%',
+                animationDelay: animationDelay + 's'
+            });
+
+            container.append(balloon);
+        }
+
+        setTimeout(() => {
+            container.empty();
+        }, 6000);
+    }
+
+    $('.close-celebration').click(function() {
+        $('#birthdayModal').fadeOut(500);
+        $('#balloonContainer').empty();
+    });
+
+    // Cerrar al hacer clic fuera del modal de cumpleaños
+    $('#birthdayModal').click(function(e) {
+        if (e.target.id === 'birthdayModal') {
+            $(this).fadeOut(500);
+            $('#balloonContainer').empty();
+        }
+    });
+    
+    // Verificar celebración de cumpleaños al cargar la página
+    checkBirthdayCelebration();
+    
+    // También verificar cada hora por si la página queda abierta
+    setInterval(checkBirthdayCelebration, 3600000); // Cada hora
+    
+    // ============================================
+    // CELEBRACIÓN DE 4 MESES
+    // ============================================
+    
+    function checkFourMonthsCelebration() {
+        const now = new Date();
+        const fourMonthsDate = new Date('2025-11-16T00:00:00'); // Fecha correcta para 4 meses
+        const fourMonthsEndDate = new Date('2025-11-17T00:00:00'); // Fin del día 16
+        const testMode = false; // Desactivar modo de prueba
+        
+        // Calcular si estamos en el día exacto de los 4 meses
+        const isFourMonthsDay = now >= fourMonthsDate && now < fourMonthsEndDate;
+        
+        // *** MODO DE PRUEBA: Descomentar la siguiente línea para probar el modal ***
+        // Para probar: cambiar false por true
+        const realTestMode = false; // CAMBIAR A false ANTES DE SUBIR A GITHUB
+        
+        // Mostrar el modal si:
+        // 1. Es el día exacto de los 4 meses (16 de marzo)
+        // O si está en modo de prueba
+        if (testMode || isFourMonthsDay) {
+            setTimeout(() => {
+                showAnniversaryCelebration();
+            }, 2000); // Esperar 2 segundos antes de mostrar
+        }
+    }
+    
+    function showAnniversaryCelebration() {
+        const modal = $('#anniversaryModal');
+        modal.fadeIn(500);
+        createHearts();
+        
+        // Reproducir sonido de celebración (si quisieras agregar uno)
+        // const audio = new Audio('path/to/celebration-sound.mp3');
+        // audio.play();
+    }
+    
+    function createHearts() {
+        const container = $('#heartContainer');
+        for (let i = 0; i < 30; i++) {
+            const heart = $('<div class="heart"></div>');
+            const left = Math.random() * 100;
+            const animationDelay = Math.random() * 4;
+
+            heart.css({
+                left: left + '%',
+                animationDelay: animationDelay + 's'
+            });
+
+            container.append(heart);
+        }
+
+        setTimeout(() => {
+            container.empty();
+        }, 6000);
+    }
+    
+    // Cerrar el modal
+    $('.close-celebration').click(function() {
+        $('#anniversaryModal').fadeOut(500);
+        $('#heartContainer').empty();
+    });
+    
+    // Cerrar al hacer clic fuera del modal
+    $('#anniversaryModal').click(function(e) {
+        if (e.target.id === 'anniversaryModal') {
+            $(this).fadeOut(500);
+            $('#heartContainer').empty();
+        }
+    });
+    
+    // Verificar celebración al cargar la página
+    checkFourMonthsCelebration();
+    
+    // También verificar cada hora por si la página queda abierta
+    setInterval(checkFourMonthsCelebration, 3600000); // Cada hora
 });
 </script>
 
